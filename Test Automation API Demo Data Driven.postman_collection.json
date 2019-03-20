@@ -1,0 +1,649 @@
+{
+	"info": {
+		"_postman_id": "8808917e-4058-49f5-8194-fda2d332f30c",
+		"name": "Test Automation API Demo Data Driven",
+		"description": "Demo for API Test Automation - Data driven",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET User Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b3655b5-9703-4d45-b89a-6959ec609597",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  GET a User Name end point",
+							"//",
+							"///////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"pm.test(\"Status if the code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of First Name field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.first_name).to.eql(pm.variables.get(\"expectedFirstName\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of Last Name field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.last_name).to.eql(pm.variables.get(\"ExpectedLastName\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of Avatar field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.avatar).to.eql(pm.variables.get(\"userAvatar\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/{{userId}}",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{userId}}"
+					]
+				},
+				"description": "Test the GET User Name end point"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Single Resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "965b3cc3-cd09-437e-8982-43fa43b2f775",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  GET Single Resource end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of the Name field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.name).to.eql(pm.variables.get(\"resourceName\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of the Color field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.color).to.eql(pm.variables.get(\"resourceColor\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/unknown/{{sourceId}}",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"unknown",
+						"{{sourceId}}"
+					]
+				},
+				"description": "Testing the GET Single Resource end point"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Collection of Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6dba732e-7340-431e-952c-a5d8134ffc03",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  GET a User Name end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of the Last Name field got the right value in the first section\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data[0].first_name).to.eql(pm.variables.get(\"pageUserName1\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of the Last Name field got the right value in the second section\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data[1].first_name).to.eql(pm.variables.get(\"pageUserName2\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of the Last Name field got the right value in the third section\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data[2].first_name).to.eql(pm.variables.get(\"pageUserName3\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users?page={{pageId}}",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{{pageId}}"
+						}
+					]
+				},
+				"description": "Testing the GET Collection of Users end point"
+			},
+			"response": []
+		},
+		{
+			"name": "POST  Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bf1ac5c2-60fe-43d5-b287-55ee66f8b3f7",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  POST Create User end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of the Name field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"userName\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of the Job field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.job).to.eql(pm.variables.get(\"userJob\"));",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{userName}}\",\r\n    \"job\": \"{{userJob}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "Testing the POST  Create user end point"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Register User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52d0a7ab-2f3a-4721-99af-be32167c7182",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  POST REgister USER end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of the Email field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.email).to.eql(pm.variables.get(\"email\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of the Password field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.password).to.eql(pm.variables.get(\"password\"));",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/reguister",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"reguister"
+					]
+				},
+				"description": "Testing the POST Register User end point"
+			},
+			"response": []
+		},
+		{
+			"name": "POST Login User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bd49f09-3957-4408-998d-a4a3f25132a1",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  POST LOgin User end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of the Token field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.token).to.eql(pm.variables.get(\"token\"));",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/login",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Testing the POST Login User ed point"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e7e9e8c-294d-41d5-ae3b-74ec00107b78",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  PUT Update User end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call was successfull",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Check the content of the response",
+							"",
+							"pm.test(\"Check if the value of the Name field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(pm.variables.get(\"updatedUserName\"));",
+							"});",
+							"",
+							"pm.test(\"Check if the value of the Job field got the right value\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.job).to.eql(pm.variables.get(\"updatedUserJob\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{updatedUserName}}\",\r\n    \"job\": \"{{updatedUserJob}}\"\r\n}"
+				},
+				"url": {
+					"raw": "https://reqres.in/api/update",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"update"
+					]
+				},
+				"description": "Testing the PUT Update User ebd point"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Users ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c181e3db-f5fb-4513-804a-ebaceb214e7b",
+						"exec": [
+							"////////////////////////////////////////////////",
+							"//Testing  DELETE Users end point",
+							"//ver : 1.0",
+							"//date: 3/19/2019",
+							"/////////////////////////////////////////////////",
+							"",
+							"// Check if the call returns with the exoected error code",
+							"",
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				},
+				"description": "Testing the DELETE Users end point"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1b6289f8-3933-4666-9922-588e5b305533",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3892e3b5-c40a-423f-8c85-58464bf4fe24",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "91566f79-5eb6-454b-ac16-4662fea52400",
+			"key": "userId",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"id": "e5e09ec0-7b01-4524-b65b-647cbdfe97de",
+			"key": "sourceId",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"id": "62b1bba2-7b37-4ac2-9fb6-1406ec37cf67",
+			"key": "pageId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "caa0ac7e-ba25-4ca5-84f0-e9832080305f",
+			"key": "userName",
+			"value": "Morpheus",
+			"type": "string"
+		},
+		{
+			"id": "ab267ce2-ca7e-4bac-be39-9c3336f53d6e",
+			"key": "userJob",
+			"value": "leader",
+			"type": "string"
+		},
+		{
+			"id": "05f1469a-3b22-4847-a62d-8dd0b80c981e",
+			"key": "email",
+			"value": "sza313@gmail.com",
+			"type": "string"
+		},
+		{
+			"id": "4cf477c6-3476-45d6-8a03-e0226f694bec",
+			"key": "password",
+			"value": "almafa",
+			"type": "string"
+		},
+		{
+			"id": "d7745a1f-32de-4406-940c-d63827e0204f",
+			"key": "updatedUserName",
+			"value": "Pisti",
+			"type": "string"
+		},
+		{
+			"id": "4fa95b52-6cfd-4f6f-ac7f-cb5ba3455e64",
+			"key": "updatedUserJob",
+			"value": "King",
+			"type": "string"
+		},
+		{
+			"id": "00757e87-45a0-4d95-864e-432c969135bc",
+			"key": "expectedFirstName",
+			"value": "Janett",
+			"type": "string"
+		},
+		{
+			"id": "678e5898-9294-475c-8e35-ef26c507ee86",
+			"key": "ExpectedLastName",
+			"value": "Weaver",
+			"type": "string"
+		},
+		{
+			"id": "e96da6ad-26db-4eaf-8254-17a9c83f5851",
+			"key": "userAvatar",
+			"value": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg",
+			"type": "string"
+		},
+		{
+			"id": "147e6f14-b7f0-4dff-b9e7-c53a5d5ddcd6",
+			"key": "resourceName",
+			"value": "fuchsia rose",
+			"type": "string"
+		},
+		{
+			"id": "5ceb4525-529d-4c4e-9cbb-9d10db1f0792",
+			"key": "resourceColor",
+			"value": "#C74375",
+			"type": "string"
+		},
+		{
+			"id": "5106465d-7f03-431c-b7e1-429213f2bc3d",
+			"key": "pageUserName1",
+			"value": "George",
+			"type": "string"
+		},
+		{
+			"id": "7befaab0-1016-4085-93e3-bc6c33eabf03",
+			"key": "pageUserName2",
+			"value": "Janet",
+			"type": "string"
+		},
+		{
+			"id": "f5987629-36e1-422b-bc88-1d139f797f27",
+			"key": "pageUserName3",
+			"value": "Emma",
+			"type": "string"
+		},
+		{
+			"id": "078d0969-fc70-4c79-b862-4517770a729a",
+			"key": "token",
+			"value": "QpwL5tke4Pnpja7X",
+			"type": "string"
+		}
+	]
+}
